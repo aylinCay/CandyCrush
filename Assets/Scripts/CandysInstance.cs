@@ -9,7 +9,7 @@ namespace CandyCrush
     class CandysInstance : MonoBehaviour
     {
        public GameObject[] candysPrefab;
-       public Candy[,] currentCandys;
+       public static Candy[,] currentCandys;
         public int widht;
         public int height;
 
@@ -28,8 +28,10 @@ namespace CandyCrush
 
         public void InstanceCandy(int x, int y)
         {
-            GameObject newCandy = Instantiate(RandomCandy(), new Vector3(x, y+10f, 0f), quaternion.identity);
+            GameObject randomCandy = RandomCandy();
+            GameObject newCandy = Instantiate(randomCandy, new Vector3(x, y+10f, 0f), quaternion.identity);
             Candy candy = newCandy.GetComponent<Candy>();
+            candy.candyName = randomCandy.name;
             candy.AddNewLocation(x,y);
             currentCandys[x,y] = candy;
 
